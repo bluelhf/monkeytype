@@ -1,11 +1,18 @@
 import { Router } from "express";
 import { authenticateRequest } from "../../middlewares/auth";
 import { asyncHandler, validateRequest } from "../../middlewares/api-utils";
+import cors from "cors";
 import configSchema from "../schemas/config-schema";
 import * as ConfigController from "../controllers/config";
 import * as RateLimit from "../../middlewares/rate-limit";
 
 const router = Router();
+
+router.use(
+  cors({
+    methods: ["GET", "PATCH"],
+  })
+);
 
 router.get(
   "/",
